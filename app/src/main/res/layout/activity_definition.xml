@@ -23,4 +23,11 @@
         android:layout_below="@+id/wordText"
         android:id="@+id/definitionList"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/definitionList"
+        android:text="Add to Favorites"
+        android:id="@+id/buttonFavorite"/>
+
 </RelativeLayout>
