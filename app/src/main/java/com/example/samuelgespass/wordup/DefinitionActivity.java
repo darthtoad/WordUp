@@ -3,6 +3,7 @@ package com.example.samuelgespass.wordup;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -40,13 +41,15 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
         wordText.setText(word);
         DefinitionArrayAdapter definitionArrayAdapter = new DefinitionArrayAdapter(this, android.R.layout.simple_list_item_1, dictionaries, definitions);
         listView.setAdapter(definitionArrayAdapter);
+        button.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         if (view == button) {
-            Intent wordIntent = getIntent();
-            String word = wordIntent.getStringExtra("word");
+            Log.d("i don't tag", "onClick: works");
+//            Intent wordIntent = getIntent();
+//            String word = wordIntent.getStringExtra("word");
             Intent newIntent = new Intent(DefinitionActivity.this, FavoritesActivity.class);
             startActivity(newIntent);
         }
