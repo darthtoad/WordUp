@@ -47,10 +47,10 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View view) {
         if (view == button) {
-            Log.d("i don't tag", "onClick: works");
-//            Intent wordIntent = getIntent();
-//            String word = wordIntent.getStringExtra("word");
+            Intent wordIntent = getIntent();
+            String word = wordIntent.getStringExtra("word");
             Intent newIntent = new Intent(DefinitionActivity.this, FavoritesActivity.class);
+            newIntent.putExtra("word", word);
             startActivity(newIntent);
         }
     }

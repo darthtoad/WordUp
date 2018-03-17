@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (v == favoritesButton) {
             Intent intent = new Intent(MainActivity.this, FavoritesActivity.class);
+            intent.putExtra("word", "");
             startActivity(intent);
         }
     }
