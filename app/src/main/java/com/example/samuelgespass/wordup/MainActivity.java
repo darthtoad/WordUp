@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,9 +37,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v == searchButton) {
             String word = searchBar.getText().toString();
-            Intent intent = new Intent(MainActivity.this, DefinitionActivity.class);
-            intent.putExtra("word", word);
-            startActivity(intent);
+            if (!word.equals("")) {
+                Intent intent = new Intent(MainActivity.this, DefinitionActivity.class);
+                intent.putExtra("word", word);
+                startActivity(intent);
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), "Please enter a word", Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
 
         if (v == favoritesButton) {
