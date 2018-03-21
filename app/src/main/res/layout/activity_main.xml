@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/titleText"
-        android:hint="Search Word"
+        android:hint="Enter Word (Case Sensitive)"
         android:id="@+id/searchBar"/>
 
     <Button

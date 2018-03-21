@@ -32,10 +32,6 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
     @BindView(R.id.buttonFavorite)
     Button button;
 
-    String[] dictionaries = {
-            "ahd-legacy", "wiktionary", "webster", "wordnet", "wordnet"
-    };
-
     ArrayList<Definition> definitions = new ArrayList<>();
 
     @Override
@@ -46,7 +42,7 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
 
         Intent wordIntent = getIntent();
         String word = wordIntent.getStringExtra("word");
-        getDefinitions(word);
+        getDefinitions(word.trim().replaceAll("[^A-Za-z0-9 ]", ""));
         button.setOnClickListener(this);
     }
 

@@ -31,7 +31,7 @@ public class WordnikService {
 //        urlBuilder.addQueryParameter(Constants.WORDNIK_WORD_QUERY_PARAMETER, word);
 //        urlBuilder.addPathSegment(Constants.WORDNIK_DEFINITION);
 //        urlBuilder.addPathSegment(Constants.WORDNIK_TOKEN);
-        String url = "http://api.wordnik.com:80/v4/word.json/" + word + "/definitions?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";
+        String url = "http://api.wordnik.com:80/v4/word.json/" + word + "/definitions?sourceDictionaries=wiktionary&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";
         Log.d("URL", url);
 
         Request request = new Request.Builder()
