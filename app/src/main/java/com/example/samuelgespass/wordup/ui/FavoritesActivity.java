@@ -1,10 +1,12 @@
-package com.example.samuelgespass.wordup;
+package com.example.samuelgespass.wordup.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.GridView;
+
+import com.example.samuelgespass.wordup.R;
+import com.example.samuelgespass.wordup.adapters.FavoritesAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;

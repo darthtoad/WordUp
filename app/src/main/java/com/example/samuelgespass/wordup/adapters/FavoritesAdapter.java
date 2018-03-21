@@ -1,4 +1,4 @@
-package com.example.samuelgespass.wordup;
+package com.example.samuelgespass.wordup.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.samuelgespass.wordup.R;
 
 /**
  * Created by samuelgespass on 3/16/18.
