@@ -17,17 +17,20 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/wordText"/>
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/wordText"
-        android:id="@+id/definitionList"/>
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/definitionList"
+        android:layout_below="@id/wordText"
+        android:layout_centerHorizontal="true"
         android:text="Add to Favorites"
         android:id="@+id/buttonFavorite"/>
+
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonFavorite"
+        android:id="@+id/definitionList"/>
+
 
 </RelativeLayout>
