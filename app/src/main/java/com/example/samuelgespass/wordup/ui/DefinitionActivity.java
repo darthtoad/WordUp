@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -37,6 +36,9 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
     @BindView(R.id.googleButton)
     Button googleButton;
 
+    @BindView(R.id.etymologyButton)
+    Button etymologyButton;
+
     ArrayList<Definition> definitions = new ArrayList<>();
 
     @Override
@@ -50,6 +52,7 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
         getDefinitions(word.trim().replaceAll("[^A-Za-z0-9 ]", ""));
         buttonFavorite.setOnClickListener(this);
         googleButton.setOnClickListener(this);
+        etymologyButton.setOnClickListener(this);
     }
 
     private void getDefinitions(final String word) {
@@ -87,12 +90,19 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
         }
 
         if (view == googleButton) {
-            Log.d("", "Thing");
             Intent wordIntent = getIntent();
             String word = wordIntent.getStringExtra("word");
             String url = "https://www.google.com/search?q=" + word;
             Intent newIntent = new Intent(Intent.ACTION_VIEW,
                     Uri.parse(url));
+            startActivity(newIntent);
+        }
+
+        if (view == etymologyButton) {
+            Intent wordIntent = getIntent();
+            String word = wordIntent.getStringExtra("word");
+            Intent newIntent = new Intent(DefinitionActivity.this, EtymologyActivity.class);
+            newIntent.putExtra("word", word);
             startActivity(newIntent);
         }
     }

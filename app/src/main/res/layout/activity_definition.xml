@@ -33,6 +33,14 @@
         android:text="Search\nGoogle"
         android:id="@+id/googleButton"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/buttonFavorite"
+        android:layout_below="@id/wordText"
+        android:text="Find Etymologies"
+        android:id="@+id/etymologyButton"/>
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -12,6 +12,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -24,7 +27,6 @@ public class WordnikService {
         OkHttpClient client = new OkHttpClient.Builder()
                 .build();
         String url = "http://api.wordnik.com:80/v4/word.json/" + word + "/definitions?sourceDictionaries=wiktionary&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";
-        Log.d("URL", url);
 
         Request request = new Request.Builder()
                 .url(url)
@@ -58,5 +60,27 @@ public class WordnikService {
         }
 
         return definitions;
+    }
+
+    public static void findEtymology(String word, Callback callback) {
+        OkHttpClient client = new OkHttpClient.Builder()
+                .build();
+        String url = "http://api.wordnik.com:80/v4/word.json/" + word + "/etymologies?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae55";
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Call call = client.newCall(request);
+        call.enqueue(callback);
+    }
+
+    public String processEtymologyResults(Response response) {
+        try {
+            String data = response.body().string();
+            return data;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "No etymologies found";
     }
 }
