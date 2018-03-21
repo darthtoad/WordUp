@@ -12,15 +12,14 @@ _This app allows a user to search for a word and get information about that word
 
 | Spec | Input | Output |
 | :-------------     | :------------- | :------------- |
-| It can return a list of definitions for a given word | "bear" | List of definitions for bear (currently only has dummy data) |
+| It can return a list of definitions for a given word | "bear" | List of definitions for bear (using Wordnik API) |
 | It can return a list of words that a user has "favorited" | view favorites | List of Favorites (dummy data) |
+| It can Google a word in the user's browser after looking up the definition | press "Google word" |
 
 ## Future Features
 
 * Add additional favorites
-* Connect to WordNik API (and perhaps others)
 * Add new favorites to words
-* Get buttons to work on favorites
 * Have an activity for etymology
 * Have an activity for related words
 * Have an activity that displays a Wikipedia article if one exists
@@ -43,6 +42,7 @@ _This project currently has no known bugs. If you find any, please [message](mai
 * _Git_
 * _GitHub_
 * _XML_
+* _Wordnik API_
 
 ### License
 
