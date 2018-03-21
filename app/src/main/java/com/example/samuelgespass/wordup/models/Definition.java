@@ -2,10 +2,6 @@ package com.example.samuelgespass.wordup.models;
 
 import org.parceler.Parcel;
 
-/**
- * Created by Guest on 3/21/18.
- */
-
 @Parcel
 public class Definition {
     String word;

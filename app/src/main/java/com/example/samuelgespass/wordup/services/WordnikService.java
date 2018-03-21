@@ -19,18 +19,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/**
- * Created by Guest on 3/21/18.
- */
-
 public class WordnikService {
     public static void findWord(String word, Callback callback) {
         OkHttpClient client = new OkHttpClient.Builder()
                 .build();
-//        HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.WORDNIK_BASE_URL).newBuilder();
-//        urlBuilder.addQueryParameter(Constants.WORDNIK_WORD_QUERY_PARAMETER, word);
-//        urlBuilder.addPathSegment(Constants.WORDNIK_DEFINITION);
-//        urlBuilder.addPathSegment(Constants.WORDNIK_TOKEN);
         String url = "http://api.wordnik.com:80/v4/word.json/" + word + "/definitions?sourceDictionaries=wiktionary&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";
         Log.d("URL", url);
 

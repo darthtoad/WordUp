@@ -17,10 +17,6 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by samuelgespass on 3/16/18.
- */
-
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.FavoritesViewHolder> {
     private Context context;
     private ArrayList<String> words;

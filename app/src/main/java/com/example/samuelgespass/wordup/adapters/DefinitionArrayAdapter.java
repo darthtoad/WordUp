@@ -5,10 +5,6 @@ import android.widget.ArrayAdapter;
 
 import com.example.samuelgespass.wordup.models.Definition;
 
-/**
- * Created by samuelgespass on 3/16/18.
- */
-
 public class DefinitionArrayAdapter extends ArrayAdapter {
     private Context context;
     private Definition[] definitions;
