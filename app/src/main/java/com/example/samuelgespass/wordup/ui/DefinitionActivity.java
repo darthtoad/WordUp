@@ -1,8 +1,10 @@
 package com.example.samuelgespass.wordup.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -30,7 +32,10 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
     ListView listView;
 
     @BindView(R.id.buttonFavorite)
-    Button button;
+    Button buttonFavorite;
+
+    @BindView(R.id.googleButton)
+    Button googleButton;
 
     ArrayList<Definition> definitions = new ArrayList<>();
 
@@ -43,7 +48,8 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
         Intent wordIntent = getIntent();
         String word = wordIntent.getStringExtra("word");
         getDefinitions(word.trim().replaceAll("[^A-Za-z0-9 ]", ""));
-        button.setOnClickListener(this);
+        buttonFavorite.setOnClickListener(this);
+        googleButton.setOnClickListener(this);
     }
 
     private void getDefinitions(final String word) {
@@ -72,11 +78,21 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View view) {
-        if (view == button) {
+        if (view == buttonFavorite) {
             Intent wordIntent = getIntent();
             String word = wordIntent.getStringExtra("word");
             Intent newIntent = new Intent(DefinitionActivity.this, FavoritesActivity.class);
             newIntent.putExtra("word", word);
+            startActivity(newIntent);
+        }
+
+        if (view == googleButton) {
+            Log.d("", "Thing");
+            Intent wordIntent = getIntent();
+            String word = wordIntent.getStringExtra("word");
+            String url = "https://www.google.com/search?q=" + word;
+            Intent newIntent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse(url));
             startActivity(newIntent);
         }
     }

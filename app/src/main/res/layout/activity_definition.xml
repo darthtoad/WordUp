@@ -22,8 +22,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/wordText"
         android:layout_centerHorizontal="true"
-        android:text="Add to Favorites"
+        android:text="Add to\nFavorites"
         android:id="@+id/buttonFavorite"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/buttonFavorite"
+        android:layout_below="@id/wordText"
+        android:text="Search\nGoogle"
+        android:id="@+id/googleButton"/>
 
 
     <ListView
