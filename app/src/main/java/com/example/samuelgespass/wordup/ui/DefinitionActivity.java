@@ -11,12 +11,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.samuelgespass.wordup.R;
 import com.example.samuelgespass.wordup.adapters.DefinitionArrayAdapter;
 import com.example.samuelgespass.wordup.models.Definition;
 import com.example.samuelgespass.wordup.services.GiphyService;
 import com.example.samuelgespass.wordup.services.WordnikService;
-import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -83,9 +83,9 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
                 DefinitionActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Picasso.with(getApplicationContext())
+                        Glide.with(getApplicationContext())
                                 .load(imageUrl)
-                                .noFade().into(imageView);
+                                .into(imageView);
                     }
                 });
             }
