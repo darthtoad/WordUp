@@ -22,6 +22,7 @@ _This app allows a user to search for a word and get information about that word
 * Add additional favorites
 * Add new favorites to words
 * Have an activity for related words
+* Choose dictionary
 
 ## Setup/Installation Requirements
 
