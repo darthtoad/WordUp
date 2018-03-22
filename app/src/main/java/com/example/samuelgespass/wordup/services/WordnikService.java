@@ -77,7 +77,7 @@ public class WordnikService {
 
     public String processEtymologyResults(Response response) {
         try {
-            String data = response.body().string().replace("\"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?>", "").replace("<ets>", "").replace("</ets>", "").replace("<ety>", "").replace("</ety>", "").replace("<er>", "").replace("</er>", "").replace("\\n", "").replace("[", "").replace("]", "");
+            String data = response.body().string().replace("\"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?>", "").replace("<ets>", "").replace("</ets>", "").replace("<ety>", "").replace("</ety>", "").replace("<er>", "").replace("</er>", "").replace("<grk>", "").replace("</grk>", "").replace("\\n", "").replace("[", "").replace("]", "");
             return data;
         } catch (IOException e) {
             e.printStackTrace();

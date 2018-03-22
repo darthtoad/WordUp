@@ -35,6 +35,7 @@ public class EtymologyActivity extends AppCompatActivity {
 
         Intent wordIntent = getIntent();
         String wordFromIntent = wordIntent.getStringExtra("word");
+        titleView.setText("Etymology of " + wordFromIntent);
         getEtymologies(wordFromIntent);
     }
 
@@ -53,7 +54,6 @@ public class EtymologyActivity extends AppCompatActivity {
                 EtymologyActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        titleView.setText(wordFromIntent);
                         textView.setText(etymologies);
                     }
                 });
