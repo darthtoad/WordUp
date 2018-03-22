@@ -38,13 +38,20 @@
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/buttonFavorite"
         android:layout_below="@id/wordText"
-        android:text="Find Etymologies"
+        android:text="Find\nEtymologies"
         android:id="@+id/etymologyButton"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonFavorite"
+        android:id="@+id/wikipediaButton"
+        android:text="See Wikipedia\nArticle"/>
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonFavorite"
+        android:layout_below="@+id/wikipediaButton"
         android:id="@+id/definitionList"/>
 
 

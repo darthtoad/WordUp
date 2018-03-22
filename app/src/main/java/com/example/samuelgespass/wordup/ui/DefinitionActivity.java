@@ -39,6 +39,9 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
     @BindView(R.id.etymologyButton)
     Button etymologyButton;
 
+    @BindView(R.id.wikipediaButton)
+    Button wikipediaButton;
+
     ArrayList<Definition> definitions = new ArrayList<>();
 
     @Override
@@ -53,6 +56,7 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
         buttonFavorite.setOnClickListener(this);
         googleButton.setOnClickListener(this);
         etymologyButton.setOnClickListener(this);
+        wikipediaButton.setOnClickListener(this);
     }
 
     private void getDefinitions(final String word) {
@@ -103,6 +107,14 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
             String word = wordIntent.getStringExtra("word");
             Intent newIntent = new Intent(DefinitionActivity.this, EtymologyActivity.class);
             newIntent.putExtra("word", word);
+            startActivity(newIntent);
+        }
+        if (view == wikipediaButton) {
+            Intent wordIntent = getIntent();
+            String word = wordIntent.getStringExtra("word");
+            String url = "https://en.wikipedia.org/wiki/" + word;
+            Intent newIntent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse(url));
             startActivity(newIntent);
         }
     }

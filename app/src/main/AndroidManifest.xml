@@ -20,7 +20,7 @@
         </activity>
         <activity android:name=".ui.DefinitionActivity" />
         <activity android:name=".ui.FavoritesActivity" />
-        <activity android:name=".ui.EtymologyActivity"></activity>
+        <activity android:name=".ui.EtymologyActivity" />
     </application>
 
 </manifest>
