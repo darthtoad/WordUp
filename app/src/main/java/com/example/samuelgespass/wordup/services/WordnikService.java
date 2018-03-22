@@ -40,7 +40,6 @@ public class WordnikService {
 
         try {
             String jsonData = response.body().string();
-            Log.d("", "processDefinitionResults: " + jsonData);
             JSONArray wordnikJSON = new JSONArray(jsonData);
             for (int i = 0; i < wordnikJSON.length(); i++) {
                 JSONObject definitionJSON = wordnikJSON.getJSONObject(i);
