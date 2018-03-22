@@ -14,15 +14,14 @@ _This app allows a user to search for a word and get information about that word
 | :-------------     | :------------- | :------------- |
 | It can return a list of definitions for a given word | "bear" | List of definitions for bear (using Wordnik API) |
 | It can return a list of words that a user has "favorited" | view favorites | List of Favorites (dummy data) |
-| It can Google a word in the user's browser after looking up the definition | press "Google word" |
+| It can Google a word in the user's browser after looking up the definition | press "Google word" | Opens Google in browser |
+| It can Wikipedia a word in the user's browser | press "See Wikipedia" | Opens Wikipedia in browser |
 
 ## Future Features
 
 * Add additional favorites
 * Add new favorites to words
-* Have an activity for etymology
 * Have an activity for related words
-* Have an activity that displays a Wikipedia article if one exists
 
 ## Setup/Installation Requirements
 
@@ -30,6 +29,7 @@ _This app allows a user to search for a word and get information about that word
 * Open Android Studio (preferably version 3.0.1)
 * Open the project in Android Studio
 * Run project
+* No need to worry about hiding API keys. The Wordnik API's docs have a key that anyone can use.
 
 ## Known Bugs
 
