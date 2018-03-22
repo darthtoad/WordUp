@@ -22,7 +22,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/image"
         android:layout_toRightOf="@+id/wordText"
-        android:layout_marginLeft="50dp"
         android:layout_above="@+id/buttonFavorite"/>
 
     <Button
