@@ -17,7 +17,7 @@ android {
         }
     }
     buildTypes.each {
-        it.buildConfigField 'String', 'WORDNIK_TOKEN', WordnikToken
+        it.buildConfigField 'String', 'GIPHY_TOKEN', GiphyToken
     }
 }
 
@@ -35,4 +35,5 @@ dependencies {
     annotationProcessor 'org.parceler:parceler:1.1.6'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.android.support:recyclerview-v7:26.1.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
