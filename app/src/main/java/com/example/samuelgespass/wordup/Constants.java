@@ -5,6 +5,6 @@ package com.example.samuelgespass.wordup;
  */
 
 public class Constants {
-    public static final String GIPHY_TOKEN = BuildConfig.GIPHY_TOKEN;
+    public static final String GIPHY_TOKEN = BuildConfig.GiphyToken;
     public static final String GIPHY_BASE_URL = "http://api.giphy.com/v1/gifs/search?q=";
 }

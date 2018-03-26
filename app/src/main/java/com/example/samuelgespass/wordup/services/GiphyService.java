@@ -26,7 +26,7 @@ public class GiphyService {
         OkHttpClient client = new OkHttpClient.Builder()
                 .build();
 
-        String url = Constants.GIPHY_BASE_URL + word + Constants.GIPHY_TOKEN;
+        String url = Constants.GIPHY_BASE_URL + word + "&api_key=" + Constants.GIPHY_TOKEN;
         Log.d("URL: ", url);
 
         Request request = new Request.Builder()
