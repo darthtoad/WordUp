@@ -52,6 +52,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.putExtra("word", word);
                 addToSharedPreferences(word);
                 startActivity(intent);
+            } else if (!sharedPreferences.getString(Constants.PREFERENCES_WORD_KEY, null).equals(null)) {
+                Intent intent = new Intent(MainActivity.this, DefinitionActivity.class);
+                word = sharedPreferences.getString(Constants.PREFERENCES_WORD_KEY, null);
+                intent.putExtra("word", word);
+                startActivity(intent);
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Please enter a word", Toast.LENGTH_SHORT);
                 toast.show();
