@@ -1,7 +1,9 @@
 package com.example.samuelgespass.wordup.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.samuelgespass.wordup.Constants;
 import com.example.samuelgespass.wordup.R;
 
 import butterknife.BindView;
@@ -24,6 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @BindView(R.id.favoritesButton) Button favoritesButton;
 
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ButterKnife.bind(this);
         Typeface tusj = Typeface.createFromAsset(getAssets(), "fonts/FFF_Tusj.ttf");
         titleText.setTypeface(tusj);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = sharedPreferences.edit();
         searchButton.setOnClickListener(this);
         favoritesButton.setOnClickListener(this);
     }
@@ -42,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (!word.equals("")) {
                 Intent intent = new Intent(MainActivity.this, DefinitionActivity.class);
                 intent.putExtra("word", word);
+                addToSharedPreferences(word);
                 startActivity(intent);
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Please enter a word", Toast.LENGTH_SHORT);
@@ -54,5 +63,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtra("word", "");
             startActivity(intent);
         }
+    }
+
+    private void addToSharedPreferences(String word) {
+        editor.putString(Constants.PREFERENCES_WORD_KEY, word).apply();
     }
 }
