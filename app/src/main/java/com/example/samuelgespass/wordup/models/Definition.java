@@ -8,15 +8,18 @@ public class Definition {
     String partOfSpeech;
     String attributionText;
     String definitionText;
+    String imageUrl;
+    String pushId;
 
     public Definition() {
     }
 
-    public Definition(String word, String partOfSpeech, String attributionText, String definitionText) {
+    public Definition(String word, String partOfSpeech, String attributionText, String definitionText, String imageUrl) {
         this.word = word;
         this.partOfSpeech = partOfSpeech;
         this.attributionText = attributionText;
         this.definitionText = definitionText;
+        this.imageUrl = imageUrl;
     }
 
     public String getWord() {
@@ -41,6 +44,22 @@ public class Definition {
 
     public void setAttributionText(String attributionText) {
         this.attributionText = attributionText;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 
     public String getDefinitionText() {

@@ -48,7 +48,7 @@ public class WordnikService {
                 String attributionText = definitionJSON.getString("attributionText");
                 String definitionText = definitionJSON.getString("text");
 
-                Definition definition = new Definition(word, partOfSpeech, attributionText, definitionText);
+                Definition definition = new Definition(word, partOfSpeech, attributionText, definitionText, "");
                 definitions.add(definition);
             }
 
