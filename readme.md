@@ -30,7 +30,7 @@ _This app allows a user to search for a word and get information about that word
 * Open Android Studio (preferably version 3.0.1)
 * Open the project in Android Studio
 * Go to [Giphy](https://developers.giphy.com/) and get an API key
-* Create a file in your root directory called "gradle.properties". This file should have the following contents: org.gradle.jvmargs=-Xmx1536m  GiphyToken = 'API KEY HERE'
+* Create a file in your root directory called "gradle.properties". This file should have the following contents: org.gradle.jvmargs=-Xmx1536m  GiphyToken = "API KEY HERE"
 * Run project
 
 ## Known Bugs

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "112473906237",
+    "firebase_url": "https://word-up-a30e0.firebaseio.com",
+    "project_id": "word-up-a30e0",
+    "storage_bucket": "word-up-a30e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112473906237:android:2cab1dca891855a8",
+        "android_client_info": {
+          "package_name": "com.example.samuelgespass.wordup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "112473906237-q766ibn4s701j3b42qs2i8f1uel5d7s2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcUXcYGpA_GYlHY8etIsZ4wpu7uUpgn5g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
