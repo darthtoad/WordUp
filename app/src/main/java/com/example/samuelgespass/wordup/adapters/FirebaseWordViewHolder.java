@@ -2,11 +2,15 @@ package com.example.samuelgespass.wordup.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.samuelgespass.wordup.Constants;
 import com.example.samuelgespass.wordup.R;
 import com.example.samuelgespass.wordup.models.Definition;
@@ -44,6 +48,11 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
 
     public void bindWord(Definition definition) {
         TextView wordTextView = (TextView) view.findViewById(R.id.wordTextView);
+        ImageView imageView = (ImageView) view.findViewById(R.id.image);
+        Glide.with(context)
+                .load(definition.getImageUrl())
+                .apply(new RequestOptions().override(MAX_WIDTH, MAX_HEIGHT).placeholder(R.drawable.pizza).error(R.drawable.pizza))
+                .into(imageView);
         wordTextView.setText(definition.getWord());
     }
 
