@@ -22,6 +22,7 @@ import org.parceler.Parcels;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by Guest on 3/29/18.
@@ -30,8 +31,6 @@ import butterknife.BindView;
 public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
-    @BindView(R.id.wordTextView)
-    TextView wordTextView;
 
     View view;
     Context context;
@@ -44,6 +43,7 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
     }
 
     public void bindWord(Definition definition) {
+        TextView wordTextView = (TextView) view.findViewById(R.id.wordTextView);
         wordTextView.setText(definition.getWord());
     }
 
