@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.samuelgespass.wordup.Constants;
 import com.example.samuelgespass.wordup.R;
 import com.example.samuelgespass.wordup.models.Definition;
+import com.example.samuelgespass.wordup.ui.DefinitionActivity;
 import com.example.samuelgespass.wordup.ui.FavoritesActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,6 +39,7 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
 
     View view;
     Context context;
+    String word;
 
     public FirebaseWordViewHolder(View itemView) {
         super(itemView);
@@ -53,33 +55,14 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
                 .load(definition.getImageUrl())
                 .apply(new RequestOptions().override(MAX_WIDTH, MAX_HEIGHT).placeholder(R.drawable.pizza).error(R.drawable.pizza))
                 .into(imageView);
-        wordTextView.setText(definition.getWord());
+        word = definition.getWord();
+        wordTextView.setText(word);
     }
 
     @Override
     public void onClick(View view) {
-        final ArrayList<Definition> definitions = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_WORDS);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    definitions.add(snapshot.getValue(Definition.class));
-                }
-
-                int position = getLayoutPosition();
-
-                Intent intent = new Intent(context, FavoritesActivity.class);
-                intent.putExtra("position", position + "");
-                intent.putExtra("definitions", Parcels.wrap(definitions));
-
-                context.startActivity(intent);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        Intent intent = new Intent(context, DefinitionActivity.class);
+        intent.putExtra("word", word);
+        context.startActivity(intent);
     }
 }
