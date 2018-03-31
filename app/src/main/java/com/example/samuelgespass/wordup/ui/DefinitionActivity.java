@@ -21,8 +21,11 @@ import com.example.samuelgespass.wordup.services.GiphyService;
 import com.example.samuelgespass.wordup.services.WordnikService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,6 +62,10 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
 
     String imageUrl = "";
 
+    String word;
+
+    boolean bool = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +73,7 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
         ButterKnife.bind(this);
 
         Intent wordIntent = getIntent();
-        String word = wordIntent.getStringExtra("word");
+        word = wordIntent.getStringExtra("word");
         getDefinitions(word.trim().replaceAll("[^A-Za-z0-9 ]", ""));
         buttonFavorite.setOnClickListener(this);
         googleButton.setOnClickListener(this);
@@ -130,6 +137,33 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
                     .getInstance()
                     .getReference(Constants.FIREBASE_CHILD_WORDS)
                     .child(uid);
+            wordRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    int i = 0;
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Log.d("Word", snapshot.child("word").getValue().toString());
+                        if (word.equals(snapshot.child("word").getValue().toString())) {
+                            if (i > 0) {
+                                snapshot.getRef().removeValue();
+                                bool = false;
+                            }
+                            i++;
+                        }
+                    }
+                    if (bool) {
+                        Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Already saved word", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
 
             DatabaseReference pushRef = wordRef.push();
             String pushId = pushRef.getKey();
@@ -140,7 +174,7 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
                 pushRef.setValue(definition);
             }
 
-            Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
+
 
         }
 
