@@ -66,6 +66,9 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
 
     boolean bool = true;
 
+    private ValueEventListener listener;
+    DatabaseReference wordRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,11 +136,11 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String uid = user.getUid();
-            DatabaseReference wordRef = FirebaseDatabase
+            wordRef = FirebaseDatabase
                     .getInstance()
                     .getReference(Constants.FIREBASE_CHILD_WORDS)
                     .child(uid);
-            wordRef.addValueEventListener(new ValueEventListener() {
+            listener = wordRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     int i = 0;
@@ -203,4 +206,11 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
             startActivity(newIntent);
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        wordRef.removeEventListener(listener);
+    }
 }
+

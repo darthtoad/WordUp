@@ -45,6 +45,7 @@ public class SavedDefinitionListActivity extends AppCompatActivity {
 
     private void setUpFirebaseAdapter() {
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Definition, FirebaseWordViewHolder>(Definition.class, R.layout.favorites_list_item, FirebaseWordViewHolder.class, definitionReference) {
+
             @Override
             protected void populateViewHolder(FirebaseWordViewHolder viewHolder, Definition model, int position) {
                 viewHolder.bindWord(model);

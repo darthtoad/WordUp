@@ -37,14 +37,23 @@
             android:text="word"
             android:textSize="30sp" />
 
-        <TextView
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/clickText"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="Delete" />
+
+        <Button
             android:id="@+id/clickText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/image"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_gravity="center"
-            android:layout_marginBottom="18dp"
             android:text="Click to see definitions" />
 
     </RelativeLayout>
