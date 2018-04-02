@@ -50,7 +50,6 @@ public class EtymologyActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 etymologies = wordnikService.processEtymologyResults(response);
-                Log.d("Etymologies", etymologies);
                 EtymologyActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

@@ -65,7 +65,6 @@ public class WordnikService {
         OkHttpClient client = new OkHttpClient.Builder()
                 .build();
         String url = "http://api.wordnik.com:80/v4/word.json/" + word + "/etymologies?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";
-        Log.d("url", url);
 
         Request request = new Request.Builder()
                 .url(url)

@@ -95,7 +95,6 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onResponse(Call call, Response response) {
                 imageUrl = giphyService.processImageUrl(response);
-                Log.d("URL", imageUrl);
                 DefinitionActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -145,7 +144,6 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     int i = 0;
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        Log.d("Word", snapshot.child("word").getValue().toString());
                         if (word.equals(snapshot.child("word").getValue().toString())) {
                             if (i > 0) {
                                 snapshot.getRef().removeValue();
@@ -210,7 +208,11 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        wordRef.removeEventListener(listener);
+        try {
+            wordRef.removeEventListener(listener);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
     }
 }
 

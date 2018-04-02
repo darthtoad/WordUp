@@ -83,7 +83,6 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
             context.startActivity(intent);
         }
         if (view == deleteButton) {
-            Log.d("delete", "yay");
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String uid = user.getUid();
             wordRef = FirebaseDatabase
@@ -101,6 +100,7 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
 
                         if (snapshot.child("word").getValue().toString().equals("")) {
                             snapshot.getRef().removeValue();
+                            wordRef.removeEventListener(this);
                         }
                     }
                 }
@@ -110,6 +110,7 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
 
                 }
             });
+
             DatabaseReference pushRef = wordRef.push();
             String pushId = pushRef.getKey();
             definition.setPushId(pushId);

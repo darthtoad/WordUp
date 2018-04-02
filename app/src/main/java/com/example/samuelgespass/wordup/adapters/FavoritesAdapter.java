@@ -63,14 +63,12 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         @Override
         public void onClick(View v) {
             if (v == clickText) {
-                Log.d("definition", "yay");
                 Intent intent = new Intent(this.context, DefinitionActivity.class);
                 intent.putExtra("word", wordTextView.getText());
                 context.startActivity(intent);
             }
 
             if (v == deleteButton) {
-                Log.d("delete", "yay");
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 String uid = user.getUid();
                 DatabaseReference wordRef = FirebaseDatabase

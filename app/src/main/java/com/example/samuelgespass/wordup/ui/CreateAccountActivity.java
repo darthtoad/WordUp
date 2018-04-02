@@ -100,7 +100,6 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                         progressDialog.dismiss();
 
                         if (task.isSuccessful()) {
-                            Log.d("taggy", "Authentication successful");
                             createFirebaseUserProfile(task.getResult().getUser());
                         } else {
                             Toast.makeText(CreateAccountActivity.this, "FAILURE! YOU ARE A COMPUTER! TEMRINATE!", Toast.LENGTH_SHORT).show();
