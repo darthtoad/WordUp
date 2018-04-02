@@ -115,8 +115,6 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
             String pushId = pushRef.getKey();
             definition.setPushId(pushId);
             pushRef.setValue(definition);
-            Intent intent = new Intent(this.context, SavedDefinitionListActivity.class);
-            this.context.startActivity(intent);
         }
     }
 
