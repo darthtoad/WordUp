@@ -23,8 +23,6 @@ _This app allows a user to search for a word and get information about that word
 ## Future Features
 
 * Have an activity for related words
-* Choose dictionary
-* Delete saved words while being able to readd them without closing the app
 
 ## Setup/Installation Requirements
 
