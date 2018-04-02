@@ -13,7 +13,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.MainActivity"></activity>
         <activity android:name=".ui.DefinitionActivity" />
-        <activity android:name=".ui.FavoritesActivity" />
         <activity android:name=".ui.EtymologyActivity" />
         <activity
             android:name=".ui.CreateAccountActivity"

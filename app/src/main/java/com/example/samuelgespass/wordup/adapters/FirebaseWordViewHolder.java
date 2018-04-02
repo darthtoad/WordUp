@@ -2,10 +2,7 @@ package com.example.samuelgespass.wordup.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,24 +14,13 @@ import com.example.samuelgespass.wordup.Constants;
 import com.example.samuelgespass.wordup.R;
 import com.example.samuelgespass.wordup.models.Definition;
 import com.example.samuelgespass.wordup.ui.DefinitionActivity;
-import com.example.samuelgespass.wordup.ui.FavoritesActivity;
-import com.example.samuelgespass.wordup.ui.MainActivity;
-import com.example.samuelgespass.wordup.ui.SavedDefinitionListActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.parceler.Parcels;
-
-import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by Guest on 3/29/18.
@@ -80,6 +66,7 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
         if (view == clickText) {
             Intent intent = new Intent(context, DefinitionActivity.class);
             intent.putExtra("word", word);
+            intent.putExtra("dictionary", "wiktionary");
             context.startActivity(intent);
         }
         if (view == deleteButton) {
