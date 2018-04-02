@@ -117,6 +117,4 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
             pushRef.setValue(definition);
         }
     }
-
-
 }

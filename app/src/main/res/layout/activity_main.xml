@@ -24,10 +24,57 @@
         android:hint="Enter Word (Case Sensitive)"
         android:id="@+id/searchBar"/>
 
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchBar"
+        android:id="@+id/radio"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose Your Dictionary"
+            android:textSize="20sp"/>
+
+        <RadioButton
+            android:id="@+id/radio_ahd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="American Heritage"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/radio_wiktionary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="Wiktionary"
+            android:textSize="16sp"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/radio_webster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="Webster"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/radio_wordnet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="WordNet"
+            android:textSize="16sp" />
+    </RadioGroup>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/searchBar"
+        android:layout_below="@id/radio"
         android:layout_marginTop="20dp"
         android:hint="Submit"
         android:id="@+id/searchButton"/>
