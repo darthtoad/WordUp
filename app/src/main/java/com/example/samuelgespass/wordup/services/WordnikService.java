@@ -23,10 +23,10 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class WordnikService {
-    public static void findWord(String word, Callback callback) {
+    public static void findWord(String word, String dictionary, Callback callback) {
         OkHttpClient client = new OkHttpClient.Builder()
                 .build();
-        String url = "http://api.wordnik.com:80/v4/word.json/" + word + "/definitions?sourceDictionaries=wiktionary&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";
+        String url = "http://api.wordnik.com:80/v4/word.json/" + word + "/definitions?sourceDictionaries=" + dictionary + "&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";
 
         Request request = new Request.Builder()
                 .url(url)

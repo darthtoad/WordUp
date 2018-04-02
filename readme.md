@@ -13,6 +13,7 @@ _This app allows a user to search for a word and get information about that word
 | Spec | Input | Output |
 | :-------------     | :------------- | :------------- |
 | It can return a list of definitions for a given word | "bear" | List of definitions for bear (using Wordnik API) |
+| It can return a list of definitions from a specific dictionary | "Wiktionary" | List of definitions from Wiktionary |
 | It can return a list of words that a user has "favorited" | view favorites | List of Favorites |
 | It can save new words | save word | Saved! |
 | It can remove saved words | remove word | reloads favorites |
@@ -46,6 +47,7 @@ _This project currently has no known bugs. If you find any, please [message](mai
 * _GitHub_
 * _XML_
 * _Wordnik API_
+* _GIPHY API_
 
 ### License
 
