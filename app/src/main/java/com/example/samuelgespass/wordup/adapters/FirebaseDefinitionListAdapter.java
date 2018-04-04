@@ -3,6 +3,7 @@ package com.example.samuelgespass.wordup.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.MotionEventCompat;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -45,7 +46,10 @@ public class FirebaseDefinitionListAdapter extends FirebaseRecyclerAdapter<Defin
         listener = databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                definitions.add(dataSnapshot.getValue(Definition.class));
+                if (!dataSnapshot.getValue(Definition.class).getWord().equals("")) {
+                    definitions.add(dataSnapshot.getValue(Definition.class));
+                    Log.e("Initial Defintions", definitions.toString());
+                }
             }
 
             @Override
@@ -55,12 +59,10 @@ public class FirebaseDefinitionListAdapter extends FirebaseRecyclerAdapter<Defin
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                definitions.remove(dataSnapshot.getValue(Definition.class));
             }
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override
@@ -105,12 +107,16 @@ public class FirebaseDefinitionListAdapter extends FirebaseRecyclerAdapter<Defin
     }
 
     private void setIndexInFirebase() {
-        for (Definition definition : definitions) {
-            int index = definitions.indexOf(definition);
-            DatabaseReference reference = getRef(index);
-            definition.setIndex(Integer.toString(index));
-            reference.setValue(definition);
-        }
+//        try {
+            for (Definition definition : definitions) {
+                int index = definitions.indexOf(definition);
+                DatabaseReference reference = getRef(index);
+                definition.setIndex(Integer.toString(index));
+                reference.setValue(definition);
+            }
+//        } catch (IndexOutOfBoundsException e) {
+//            e.printStackTrace();
+//        }
     }
 
 }
