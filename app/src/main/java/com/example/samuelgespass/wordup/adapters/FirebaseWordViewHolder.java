@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
  * Created by Guest on 3/29/18.
  */
 
-public class FirebaseWordViewHolder extends RecyclerView.ViewHolder {
+public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
 
@@ -58,5 +58,51 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder {
                 .into(image);
         word = definition.getWord();
         wordTextView.setText(word);
+        clickText.setOnClickListener(this);
+        deleteButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == clickText) {
+            Intent intent = new Intent(context, DefinitionActivity.class);
+            intent.putExtra("word", word);
+            intent.putExtra("dictionary", "wiktionary");
+            context.startActivity(intent);
+        }
+        if (view == deleteButton) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
+            wordRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_WORDS)
+                    .child(uid);
+
+            listener = wordRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        if (word.equals(snapshot.child("word").getValue().toString())) {
+                            snapshot.getRef().removeValue();
+                        }
+
+                        if (snapshot.child("word").getValue().toString().equals("")) {
+                            snapshot.getRef().removeValue();
+                            wordRef.removeEventListener(this);
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+            DatabaseReference pushRef = wordRef.push();
+            String pushId = pushRef.getKey();
+            definition.setPushId(pushId);
+            pushRef.setValue(definition);
+        }
     }
 }

@@ -55,7 +55,7 @@ public class FirebaseDefinitionListAdapter extends FirebaseRecyclerAdapter<Defin
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+                definitions.remove(dataSnapshot.getValue(Definition.class));
             }
 
             @Override
@@ -80,52 +80,6 @@ public class FirebaseDefinitionListAdapter extends FirebaseRecyclerAdapter<Defin
                     dragListener.onStartDrag(viewHolder);
                 }
                 return false;
-            }
-        });
-
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (view == viewHolder.clickText) {
-                    Intent intent = new Intent(context, DefinitionActivity.class);
-                    intent.putExtra("word", viewHolder.word);
-                    intent.putExtra("dictionary", "wiktionary");
-                    context.startActivity(intent);
-                }
-                if (view == viewHolder.deleteButton) {
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    String uid = user.getUid();
-                    databaseReference = FirebaseDatabase
-                            .getInstance()
-                            .getReference(Constants.FIREBASE_CHILD_WORDS)
-                            .child(uid);
-
-                    valueEventListener = databaseReference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                if (viewHolder.word.equals(snapshot.child("word").getValue().toString())) {
-                                    snapshot.getRef().removeValue();
-                                }
-
-                                if (snapshot.child("word").getValue().toString().equals("")) {
-                                    snapshot.getRef().removeValue();
-                                    databaseReference.removeEventListener(this);
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-
-                    DatabaseReference pushRef = databaseReference.push();
-                    String pushId = pushRef.getKey();
-                    viewHolder.definition.setPushId(pushId);
-                    pushRef.setValue(viewHolder.definition);
-                }
             }
         });
     }
