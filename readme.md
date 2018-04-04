@@ -17,6 +17,7 @@ _This app allows a user to search for a word and get information about that word
 | It can return a list of words that a user has "favorited" | view favorites | List of Favorites |
 | It can save new words | save word | Saved! |
 | It can remove saved words | remove word | reloads favorites |
+| It can change the order of saved words | drag word | changes order |
 | It can Google a word in the user's browser after looking up the definition | press "Google word" | Opens Google in browser |
 | It can Wikipedia a word in the user's browser | press "See Wikipedia" | Opens Wikipedia in browser |
 
