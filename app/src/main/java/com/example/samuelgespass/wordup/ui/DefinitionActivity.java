@@ -79,6 +79,7 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
 
         Intent wordIntent = getIntent();
         word = wordIntent.getStringExtra("word");
+        int startingPosition = getIntent().getIntExtra("position", 0);
         dictionary = wordIntent.getStringExtra("dictionary");
         getDefinitions(word.trim().replaceAll("[^A-Za-z0-9 ]", ""), dictionary);
         buttonFavorite.setOnClickListener(this);
@@ -111,6 +112,7 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
 
         final WordnikService wordnikService = new WordnikService();
         wordnikService.findWord(word, dictionary, new Callback() {
+
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();

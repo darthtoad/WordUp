@@ -19,13 +19,27 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/space"
-            android:layout_toRightOf="@+id/space" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentTop="true" />
+
+            <ImageView
+                android:id="@+id/dragIcon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignLeft="@id/image"
+                android:layout_alignBottom="@+id/image"
+                android:gravity="bottom|left"
+                android:src="@mipmap/ic_reorder_white_24dp"/>
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/wordTextView"
@@ -50,7 +64,7 @@
             android:id="@+id/clickText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/image"
+            android:layout_alignBottom="@+id/relativeLayout"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_gravity="center"

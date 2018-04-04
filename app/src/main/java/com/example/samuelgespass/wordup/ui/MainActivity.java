@@ -106,6 +106,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (!word.equals("")) {
                 Intent intent = new Intent(MainActivity.this, DefinitionActivity.class);
                 intent.putExtra("word", word);
+                if (dictionary == null) {
+                    dictionary = "wiktionary";
+                }
                 intent.putExtra("dictionary", dictionary);
                 addToSharedPreferences(word);
                 startActivity(intent);
