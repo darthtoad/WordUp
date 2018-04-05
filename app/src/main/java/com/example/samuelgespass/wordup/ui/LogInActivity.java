@@ -105,10 +105,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("Sign In", "" + task.isSuccessful());
                         progressDialog.dismiss();
                         if (!task.isSuccessful()) {
-                            Log.w("email", task.getException());
                             Toast.makeText(LogInActivity.this, "FAIL!", Toast.LENGTH_SHORT).show();
                         }
                     }

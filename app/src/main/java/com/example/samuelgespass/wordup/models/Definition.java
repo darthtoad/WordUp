@@ -10,6 +10,7 @@ public class Definition {
     String definitionText;
     String imageUrl;
     String pushId;
+    String index;
 
     public Definition() {
     }
@@ -20,6 +21,15 @@ public class Definition {
         this.attributionText = attributionText;
         this.definitionText = definitionText;
         this.imageUrl = imageUrl;
+        this.index = "not_specified";
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 
     public String getWord() {

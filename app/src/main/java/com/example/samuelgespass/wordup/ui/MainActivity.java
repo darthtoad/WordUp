@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+    String dictionary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         finish();
     }
 
+    public void onRadioButtonClicked(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+
+        switch (view.getId()) {
+            case R.id.radio_ahd:
+                if (checked) {
+                    dictionary = "ahd";
+                }
+                break;
+            case R.id.radio_webster:
+                if (checked) {
+                    dictionary = "webster";
+                }
+                break;
+            case R.id.radio_wordnet:
+                if (checked) {
+                    dictionary = "wordnet";
+                }
+                break;
+            default:
+                dictionary = "wiktionary";
+                break;
+        }
+    }
+
     @Override
     public void onClick(View v) {
         if (v == searchButton) {
@@ -79,12 +106,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (!word.equals("")) {
                 Intent intent = new Intent(MainActivity.this, DefinitionActivity.class);
                 intent.putExtra("word", word);
+                if (dictionary == null) {
+                    dictionary = "wiktionary";
+                }
+                intent.putExtra("dictionary", dictionary);
                 addToSharedPreferences(word);
                 startActivity(intent);
             } else if (!sharedPreferences.getString(Constants.PREFERENCES_WORD_KEY, null).equals(null)) {
                 Intent intent = new Intent(MainActivity.this, DefinitionActivity.class);
                 word = sharedPreferences.getString(Constants.PREFERENCES_WORD_KEY, null);
                 intent.putExtra("word", word);
+                intent.putExtra("dictionary", dictionary);
                 startActivity(intent);
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Please enter a word", Toast.LENGTH_SHORT);

@@ -27,7 +27,6 @@ public class GiphyService {
                 .build();
 
         String url = Constants.GIPHY_BASE_URL + word + "&api_key=" + Constants.GIPHY_TOKEN;
-        Log.d("URL: ", url);
 
         Request request = new Request.Builder()
                 .url(url)
@@ -54,7 +53,6 @@ public class GiphyService {
         catch (JSONException e){
             e.printStackTrace();
         }
-        Log.d("image url:", imageUrl);
         return imageUrl;
     }
 }

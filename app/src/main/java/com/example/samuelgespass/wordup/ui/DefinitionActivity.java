@@ -64,7 +64,12 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
 
     String word;
 
+    String dictionary;
+
     boolean bool = true;
+
+    private ValueEventListener listener;
+    DatabaseReference wordRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,14 +79,16 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
 
         Intent wordIntent = getIntent();
         word = wordIntent.getStringExtra("word");
-        getDefinitions(word.trim().replaceAll("[^A-Za-z0-9 ]", ""));
+        int startingPosition = getIntent().getIntExtra("position", 0);
+        dictionary = wordIntent.getStringExtra("dictionary");
+        getDefinitions(word.trim().replaceAll("[^A-Za-z0-9 ]", ""), dictionary);
         buttonFavorite.setOnClickListener(this);
         googleButton.setOnClickListener(this);
         etymologyButton.setOnClickListener(this);
         wikipediaButton.setOnClickListener(this);
     }
 
-    private void getDefinitions(final String word) {
+    private void getDefinitions(final String word, final String dictionary) {
         final GiphyService giphyService = new GiphyService();
         giphyService.findImage(word, new Callback() {
             @Override
@@ -92,7 +99,6 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onResponse(Call call, Response response) {
                 imageUrl = giphyService.processImageUrl(response);
-                Log.d("URL", imageUrl);
                 DefinitionActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -105,7 +111,8 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
         });
 
         final WordnikService wordnikService = new WordnikService();
-        wordnikService.findWord(word, new Callback() {
+        wordnikService.findWord(word, dictionary, new Callback() {
+
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
@@ -133,16 +140,15 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String uid = user.getUid();
-            DatabaseReference wordRef = FirebaseDatabase
+            wordRef = FirebaseDatabase
                     .getInstance()
                     .getReference(Constants.FIREBASE_CHILD_WORDS)
                     .child(uid);
-            wordRef.addValueEventListener(new ValueEventListener() {
+            listener = wordRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     int i = 0;
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        Log.d("Word", snapshot.child("word").getValue().toString());
                         if (word.equals(snapshot.child("word").getValue().toString())) {
                             if (i > 0) {
                                 snapshot.getRef().removeValue();
@@ -203,4 +209,15 @@ public class DefinitionActivity extends AppCompatActivity implements View.OnClic
             startActivity(newIntent);
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            wordRef.removeEventListener(listener);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
 }
+

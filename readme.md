@@ -13,16 +13,17 @@ _This app allows a user to search for a word and get information about that word
 | Spec | Input | Output |
 | :-------------     | :------------- | :------------- |
 | It can return a list of definitions for a given word | "bear" | List of definitions for bear (using Wordnik API) |
-| It can return a list of words that a user has "favorited" | view favorites | List of Favorites (dummy data) |
+| It can return a list of definitions from a specific dictionary | "Wiktionary" | List of definitions from Wiktionary |
+| It can return a list of words that a user has "favorited" | view favorites | List of Favorites |
+| It can save new words | save word | Saved! |
+| It can remove saved words | remove word | reloads favorites |
+| It can change the order of saved words | drag word | changes order |
 | It can Google a word in the user's browser after looking up the definition | press "Google word" | Opens Google in browser |
 | It can Wikipedia a word in the user's browser | press "See Wikipedia" | Opens Wikipedia in browser |
 
 ## Future Features
 
-* Add additional favorites
-* Add new favorites to words
 * Have an activity for related words
-* Choose dictionary
 
 ## Setup/Installation Requirements
 
@@ -30,7 +31,7 @@ _This app allows a user to search for a word and get information about that word
 * Open Android Studio (preferably version 3.0.1)
 * Open the project in Android Studio
 * Go to [Giphy](https://developers.giphy.com/) and get an API key
-* Create a file in your root directory called "gradle.properties". This file should have the following contents: org.gradle.jvmargs=-Xmx1536m  GiphyToken = "API KEY HERE"
+* Create a file in your root directory called "gradle.properties". This file should have the following content: org.gradle.jvmargs=-Xmx1536m  GiphyToken = "API KEY HERE"
 * Run project
 
 ## Known Bugs
@@ -45,6 +46,7 @@ _This project currently has no known bugs. If you find any, please [message](mai
 * _GitHub_
 * _XML_
 * _Wordnik API_
+* _GIPHY API_
 
 ### License
 
