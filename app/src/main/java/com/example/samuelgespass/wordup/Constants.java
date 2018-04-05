@@ -11,4 +11,6 @@ public class Constants {
     public static final String FIREBASE_CHILD_SEARCHED_WORD = "searchedWord";
     public static final String FIREBASE_CHILD_WORDS = "words";
     public static final String FIREBASE_QUERY_INDEX = "index";
+    public static final String EXTRA_KEY_POSITION = "position";
+    public static final String EXTRA_KEY_DEFINITIONS = "definitions";
 }

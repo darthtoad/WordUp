@@ -31,6 +31,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.parceler.Parcels;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -85,14 +87,26 @@ public class DefinitionFragment extends Fragment implements View.OnClickListener
 
     private Set<String> definitionSet;
 
+    private int position;
+
     public DefinitionFragment() {
         // Required empty public constructor
+    }
+
+    public static DefinitionFragment newInstance(ArrayList<Definition> definitions, Integer position) {
+        DefinitionFragment definitionFragment = new DefinitionFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(Constants.EXTRA_KEY_DEFINITIONS, Parcels.wrap(definitions));
+        args.putInt(Constants.EXTRA_KEY_POSITION, position);
+        definitionFragment.setArguments(args);
+        return definitionFragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        definitions = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_KEY_DEFINITIONS));
+        position = getArguments().getInt(Constants.EXTRA_KEY_POSITION);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         editor = sharedPreferences.edit();
         setHasOptionsMenu(true);

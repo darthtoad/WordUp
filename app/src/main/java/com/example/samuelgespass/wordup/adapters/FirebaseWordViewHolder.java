@@ -3,7 +3,10 @@ package com.example.samuelgespass.wordup.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +19,7 @@ import com.example.samuelgespass.wordup.Constants;
 import com.example.samuelgespass.wordup.R;
 import com.example.samuelgespass.wordup.models.Definition;
 import com.example.samuelgespass.wordup.ui.DefinitionActivity;
+import com.example.samuelgespass.wordup.ui.DefinitionFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +28,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.parceler.Parcels;
+
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -47,6 +55,7 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     Set<String> definitionSet = new HashSet<>();
+    private int orientation;
 
 
     public FirebaseWordViewHolder(View itemView) {
@@ -55,6 +64,19 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
         context = itemView.getContext();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         editor = sharedPreferences.edit();
+        orientation = itemView.getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            createDefinitionFragment(0);
+        }
+        itemView.setOnClickListener(this);
+    }
+
+    public void createDefinitionFragment(int position) {
+        ArrayList definitions = new ArrayList(definitionSet);
+        DefinitionFragment definitionFragment = DefinitionFragment.newInstance(definitions, position);
+        FragmentTransaction fragmentTransaction = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.definitionContainer, definitionFragment);
+        fragmentTransaction.commit();
     }
 
     public void bindWord(Definition definition) {
@@ -72,12 +94,17 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
 
     @Override
     public void onClick(View view) {
-        if (view == clickText) {
-            Intent intent = new Intent(context, DefinitionActivity.class);
-            definitionSet.add(word);
-            definitionSet.add("wiktionary");
-            addToSharedPreferences(definitionSet);
-            context.startActivity(intent);
+        int itemPosition = getLayoutPosition();
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            createDefinitionFragment(itemPosition);
+        } else {
+            if (view == clickText) {
+                Intent intent = new Intent(context, DefinitionActivity.class);
+                definitionSet.add(word);
+                definitionSet.add("wiktionary");
+                addToSharedPreferences(definitionSet);
+                context.startActivity(intent);
+            }
         }
     }
 

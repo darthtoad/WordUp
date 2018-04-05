@@ -2,6 +2,7 @@ package com.example.samuelgespass.wordup.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v4.view.MotionEventCompat;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -33,6 +34,7 @@ public class FirebaseDefinitionListAdapter extends FirebaseRecyclerAdapter<Defin
     private ChildEventListener listener;
     private ValueEventListener valueEventListener;
     private ArrayList<Definition> definitions = new ArrayList<>();
+    private int orientation;
 
     public FirebaseDefinitionListAdapter(Class<Definition> modelClass, int modelLayout, Class<FirebaseWordViewHolder> viewHolderClass, Query query, OnStartDragListener dragListener, Context context) {
         super(modelClass, modelLayout, viewHolderClass, query);
@@ -69,6 +71,10 @@ public class FirebaseDefinitionListAdapter extends FirebaseRecyclerAdapter<Defin
     @Override
     protected void populateViewHolder(final FirebaseWordViewHolder viewHolder, Definition model, int position) {
         viewHolder.bindWord(model);
+        orientation = viewHolder.itemView.getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            viewHolder.createDefinitionFragment(0);
+        }
         viewHolder.image.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
