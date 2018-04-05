@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +20,10 @@ import android.widget.Toast;
 import com.example.samuelgespass.wordup.Constants;
 import com.example.samuelgespass.wordup.R;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     String dictionary;
+    String word;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,15 +116,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     dictionary = "wiktionary";
                 }
                 intent.putExtra("dictionary", dictionary);
-                addToSharedPreferences(word);
-                addToSharedPreferences(dictionary);
-                startActivity(intent);
-            } else if (!sharedPreferences.getString(Constants.PREFERENCES_WORD_KEY, null).equals(null)) {
-                Intent intent = new Intent(MainActivity.this, DefinitionActivity.class);
-                word = sharedPreferences.getString(Constants.PREFERENCES_WORD_KEY, null);
-                dictionary = sharedPreferences.getString(Constants.PREFERENCES_DICTIONARY_KEY, null);
-                intent.putExtra("word", word);
-                intent.putExtra("dictionary", dictionary);
                 startActivity(intent);
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Please enter a word", Toast.LENGTH_SHORT);
@@ -130,9 +127,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(MainActivity.this, SavedDefinitionListActivity.class);
             startActivity(intent);
         }
-    }
-
-    private void addToSharedPreferences(String word) {
-        editor.putString(Constants.PREFERENCES_WORD_KEY, word).apply();
     }
 }

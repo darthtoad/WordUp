@@ -7,13 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.view.menu.MenuView;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -39,6 +33,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -87,6 +83,8 @@ public class DefinitionFragment extends Fragment implements View.OnClickListener
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
+    private Set<String> definitionSet;
+
     public DefinitionFragment() {
         // Required empty public constructor
     }
@@ -107,8 +105,21 @@ public class DefinitionFragment extends Fragment implements View.OnClickListener
         View view = inflater.inflate(R.layout.fragment_definition, container, false);
         ButterKnife.bind(this, view);
 
-        word = sharedPreferences.getString(Constants.PREFERENCES_WORD_KEY, null);
-        dictionary = sharedPreferences.getString(Constants.PREFERENCES_DICTIONARY_KEY, null);
+        Intent wordIntent = getActivity().getIntent();
+        word = wordIntent.getStringExtra("word");
+        int startingPosition = getActivity().getIntent().getIntExtra("position", 0);
+        dictionary = wordIntent.getStringExtra("dictionary");
+
+        if (word == null || dictionary == null) {
+            definitionSet = sharedPreferences.getStringSet("definition", new HashSet<String>());
+            Object[] stringArr = definitionSet.toArray();
+            word = stringArr[0].toString();
+            dictionary = stringArr[1].toString();
+            if (word.equals("wiktionary") || word.equals("webster") || word.equals("ahd") || word.equals("wordnet")) {
+                word = stringArr[1].toString();
+                dictionary = stringArr[0].toString();
+            }
+        }
 
         buttonFavorite.setOnClickListener(this);
         googleButton.setOnClickListener(this);

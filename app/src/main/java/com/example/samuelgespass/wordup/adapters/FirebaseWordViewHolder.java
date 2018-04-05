@@ -2,6 +2,8 @@ package com.example.samuelgespass.wordup.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +24,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by Guest on 3/29/18.
  */
@@ -39,11 +44,17 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
     private ValueEventListener listener;
     DatabaseReference wordRef;
     public ImageView image;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    Set<String> definitionSet = new HashSet<>();
+
 
     public FirebaseWordViewHolder(View itemView) {
         super(itemView);
         view = itemView;
         context = itemView.getContext();
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        editor = sharedPreferences.edit();
     }
 
     public void bindWord(Definition definition) {
@@ -63,43 +74,14 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
     public void onClick(View view) {
         if (view == clickText) {
             Intent intent = new Intent(context, DefinitionActivity.class);
-            intent.putExtra("word", word);
-            intent.putExtra("dictionary", "wiktionary");
+            definitionSet.add(word);
+            definitionSet.add("wiktionary");
+            addToSharedPreferences(definitionSet);
             context.startActivity(intent);
         }
-//        if (view == deleteButton) {
-//            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//            String uid = user.getUid();
-//            wordRef = FirebaseDatabase
-//                    .getInstance()
-//                    .getReference(Constants.FIREBASE_CHILD_WORDS)
-//                    .child(uid);
-//
-//            listener = wordRef.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(DataSnapshot dataSnapshot) {
-//                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                        if (word.equals(snapshot.child("word").getValue().toString())) {
-//                            snapshot.getRef().removeValue();
-//                        }
-//
-//                        if (snapshot.child("word").getValue().toString().equals("")) {
-//                            snapshot.getRef().removeValue();
-//                            wordRef.removeEventListener(this);
-//                        }
-//                    }
-//                }
-//
-//                @Override
-//                public void onCancelled(DatabaseError databaseError) {
-//
-//                }
-//            });
-//
-//            DatabaseReference pushRef = wordRef.push();
-//            String pushId = pushRef.getKey();
-//            definition.setPushId(pushId);
-//            pushRef.setValue(definition);
-//        }
+    }
+
+    private void addToSharedPreferences(Set<String> definitionSet) {
+        editor.putStringSet(Constants.PREFERENCES_DEFINITION_KEY, definitionSet).apply();
     }
 }

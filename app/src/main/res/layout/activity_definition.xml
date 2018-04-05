@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,59 +7,12 @@
     android:layout_height="match_parent"
     tools:context="com.example.samuelgespass.wordup.ui.DefinitionActivity">
 
-    <TextView
+    <fragment
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Word"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/wordText"/>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/image"
-        android:layout_toRightOf="@+id/wordText"
-        android:layout_above="@+id/buttonFavorite"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/wordText"
-        android:layout_centerHorizontal="true"
-        android:text="Add to\nFavorites"
-        android:id="@+id/buttonFavorite"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/buttonFavorite"
-        android:layout_below="@id/wordText"
-        android:text="Search\nGoogle"
-        android:id="@+id/googleButton"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/buttonFavorite"
-        android:layout_below="@id/wordText"
-        android:text="Find\nEtymologies"
-        android:id="@+id/etymologyButton"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/buttonFavorite"
-        android:id="@+id/wikipediaButton"
-        android:text="See Wikipedia\nArticle"/>
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/wikipediaButton"
-        android:id="@+id/definitionList"/>
+        android:id="@+id/definitionFragment"
+        android:name="com.example.samuelgespass.wordup.ui.DefinitionFragment"
+        tools:layout="@layout/fragment_definition" />
 
 
-</RelativeLayout>
+</FrameLayout>
