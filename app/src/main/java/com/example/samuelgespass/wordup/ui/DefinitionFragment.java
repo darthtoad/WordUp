@@ -115,9 +115,9 @@ public class DefinitionFragment extends Fragment implements View.OnClickListener
             Object[] stringArr = definitionSet.toArray();
             word = stringArr[0].toString();
             dictionary = stringArr[1].toString();
-            if (word.equals("wiktionary") || word.equals("webster") || word.equals("ahd") || word.equals("wordnet")) {
+            if (word.equals("wiktionary") || word.equals("Webster") || word.equals("ahd") || word.equals("wordnet")) {
                 word = stringArr[1].toString();
-                dictionary = stringArr[0].toString();
+                dictionary = stringArr[0].toString().toLowerCase();
             }
         }
 
@@ -130,7 +130,7 @@ public class DefinitionFragment extends Fragment implements View.OnClickListener
             if (dictionary == null) {
                 dictionary = "wiktionary";
             }
-            getDefinitions(word.trim().replaceAll("[^A-Za-z0-9 ]", ""), dictionary);
+            getDefinitions(word.trim().replaceAll("[^A-Za-z0-9 ]", ""), dictionary.toLowerCase());
         }
         return view;
     }

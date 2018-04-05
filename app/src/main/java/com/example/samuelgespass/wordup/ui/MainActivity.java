@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.radio_webster:
                 if (checked) {
-                    dictionary = "webster";
+                    dictionary = "Webster";
                 }
                 break;
             case R.id.radio_wordnet:
