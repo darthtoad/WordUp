@@ -48,17 +48,17 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:text="word"
+            android:text="poop"
             android:textSize="30sp" />
 
-        <Button
-            android:id="@+id/deleteButton"
+        <TextView
+            android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/clickText"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="Delete" />
+            android:text="Swipe\nto\ndelete"
+            android:textAlignment="center"/>
 
         <Button
             android:id="@+id/clickText"

@@ -34,7 +34,6 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
     Context context;
     String word;
     Button clickText;
-    Button deleteButton;
     TextView wordTextView;
     Definition definition = new Definition("", "", "", "", "");
     private ValueEventListener listener;
@@ -49,7 +48,6 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
 
     public void bindWord(Definition definition) {
         clickText = (Button) view.findViewById(R.id.clickText);
-        deleteButton = (Button) view.findViewById(R.id.deleteButton);
         wordTextView = (TextView) view.findViewById(R.id.wordTextView);
         image = (ImageView) view.findViewById(R.id.image);
         Glide.with(context)
@@ -59,7 +57,6 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
         word = definition.getWord();
         wordTextView.setText(word);
         clickText.setOnClickListener(this);
-        deleteButton.setOnClickListener(this);
     }
 
     @Override
@@ -70,39 +67,39 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
             intent.putExtra("dictionary", "wiktionary");
             context.startActivity(intent);
         }
-        if (view == deleteButton) {
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            String uid = user.getUid();
-            wordRef = FirebaseDatabase
-                    .getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_WORDS)
-                    .child(uid);
-
-            listener = wordRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        if (word.equals(snapshot.child("word").getValue().toString())) {
-                            snapshot.getRef().removeValue();
-                        }
-
-                        if (snapshot.child("word").getValue().toString().equals("")) {
-                            snapshot.getRef().removeValue();
-                            wordRef.removeEventListener(this);
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-
-            DatabaseReference pushRef = wordRef.push();
-            String pushId = pushRef.getKey();
-            definition.setPushId(pushId);
-            pushRef.setValue(definition);
-        }
+//        if (view == deleteButton) {
+//            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//            String uid = user.getUid();
+//            wordRef = FirebaseDatabase
+//                    .getInstance()
+//                    .getReference(Constants.FIREBASE_CHILD_WORDS)
+//                    .child(uid);
+//
+//            listener = wordRef.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                        if (word.equals(snapshot.child("word").getValue().toString())) {
+//                            snapshot.getRef().removeValue();
+//                        }
+//
+//                        if (snapshot.child("word").getValue().toString().equals("")) {
+//                            snapshot.getRef().removeValue();
+//                            wordRef.removeEventListener(this);
+//                        }
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//
+//                }
+//            });
+//
+//            DatabaseReference pushRef = wordRef.push();
+//            String pushId = pushRef.getKey();
+//            definition.setPushId(pushId);
+//            pushRef.setValue(definition);
+//        }
     }
 }

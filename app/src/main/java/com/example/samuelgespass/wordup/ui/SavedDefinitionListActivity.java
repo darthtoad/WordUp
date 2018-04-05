@@ -60,6 +60,12 @@ public class SavedDefinitionListActivity extends AppCompatActivity implements On
                 super.onItemRangeInserted(positionStart, itemCount);
                 firebaseDefinitionListAdapter.notifyDataSetChanged();
             }
+
+//            @Override
+//            public void onItemRangeRemoved(int positionStart, int itemCount) {
+//                super.onItemRangeRemoved(positionStart, itemCount);
+//                firebaseDefinitionListAdapter.notifyDataSetChanged();
+//            }
         });
 
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(firebaseDefinitionListAdapter);

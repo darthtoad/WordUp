@@ -54,7 +54,6 @@ public class FirebaseDefinitionListAdapter extends FirebaseRecyclerAdapter<Defin
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override
@@ -67,7 +66,6 @@ public class FirebaseDefinitionListAdapter extends FirebaseRecyclerAdapter<Defin
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }
@@ -106,7 +104,8 @@ public class FirebaseDefinitionListAdapter extends FirebaseRecyclerAdapter<Defin
         databaseReference.removeEventListener(listener);
     }
 
-    private void setIndexInFirebase() {
+    public void setIndexInFirebase() {
+
 //        try {
             for (Definition definition : definitions) {
                 int index = definitions.indexOf(definition);
