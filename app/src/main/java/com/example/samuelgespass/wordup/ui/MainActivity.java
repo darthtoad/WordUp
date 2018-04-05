@@ -111,10 +111,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 intent.putExtra("dictionary", dictionary);
                 addToSharedPreferences(word);
+                addToSharedPreferences(dictionary);
                 startActivity(intent);
             } else if (!sharedPreferences.getString(Constants.PREFERENCES_WORD_KEY, null).equals(null)) {
                 Intent intent = new Intent(MainActivity.this, DefinitionActivity.class);
                 word = sharedPreferences.getString(Constants.PREFERENCES_WORD_KEY, null);
+                dictionary = sharedPreferences.getString(Constants.PREFERENCES_DICTIONARY_KEY, null);
                 intent.putExtra("word", word);
                 intent.putExtra("dictionary", dictionary);
                 startActivity(intent);

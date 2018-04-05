@@ -26,10 +26,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * Created by Guest on 4/4/18.
- */
-
 public class FirebaseDefinitionListAdapter extends FirebaseRecyclerAdapter<Definition, FirebaseWordViewHolder> implements ItemTouchHelperAdapter {
     private DatabaseReference databaseReference;
     private OnStartDragListener dragListener;
@@ -105,17 +101,12 @@ public class FirebaseDefinitionListAdapter extends FirebaseRecyclerAdapter<Defin
     }
 
     public void setIndexInFirebase() {
-
-//        try {
-            for (Definition definition : definitions) {
-                int index = definitions.indexOf(definition);
-                DatabaseReference reference = getRef(index);
-                definition.setIndex(Integer.toString(index));
-                reference.setValue(definition);
-            }
-//        } catch (IndexOutOfBoundsException e) {
-//            e.printStackTrace();
-//        }
+        for (Definition definition : definitions) {
+            int index = definitions.indexOf(definition);
+            DatabaseReference reference = getRef(index);
+            definition.setIndex(Integer.toString(index));
+            reference.setValue(definition);
+        }
     }
 
 }

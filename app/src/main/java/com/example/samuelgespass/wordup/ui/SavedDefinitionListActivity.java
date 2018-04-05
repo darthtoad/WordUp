@@ -23,7 +23,7 @@ import com.google.firebase.database.Query;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SavedDefinitionListActivity extends AppCompatActivity implements OnStartDragListener{
+public class SavedDefinitionListActivity extends AppCompatActivity {
 //    private DatabaseReference definitionReference;
     private FirebaseDefinitionListAdapter firebaseDefinitionListAdapter;
     private ItemTouchHelper helper;
@@ -34,53 +34,6 @@ public class SavedDefinitionListActivity extends AppCompatActivity implements On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_favorites);
-        ButterKnife.bind(this);
-        setUpFirebaseAdapter();
-    }
-
-    private void setUpFirebaseAdapter() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
-
-        Query query = FirebaseDatabase
-                .getInstance()
-                .getReference(Constants.FIREBASE_CHILD_WORDS)
-                .child(uid)
-                .orderByChild(Constants.FIREBASE_QUERY_INDEX);
-
-        firebaseDefinitionListAdapter = new FirebaseDefinitionListAdapter(Definition.class, R.layout.favorites_list_item_drag, FirebaseWordViewHolder.class, query, this, this);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(firebaseDefinitionListAdapter);
-
-        firebaseDefinitionListAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-            @Override
-            public void onItemRangeInserted(int positionStart, int itemCount) {
-                super.onItemRangeInserted(positionStart, itemCount);
-                firebaseDefinitionListAdapter.notifyDataSetChanged();
-            }
-
-//            @Override
-//            public void onItemRangeRemoved(int positionStart, int itemCount) {
-//                super.onItemRangeRemoved(positionStart, itemCount);
-//                firebaseDefinitionListAdapter.notifyDataSetChanged();
-//            }
-        });
-
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(firebaseDefinitionListAdapter);
-        helper = new ItemTouchHelper(callback);
-        helper.attachToRecyclerView(recyclerView);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        firebaseDefinitionListAdapter.cleanup();
-    }
-
-    @Override
-    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
-        helper.startDrag(viewHolder);
+        setContentView(R.layout.activity_saved_definition_list);
     }
 }
