@@ -95,6 +95,7 @@ public class FirebaseDefinitionListAdapter extends FirebaseRecyclerAdapter<Defin
                 int itemPosition = viewHolder.getAdapterPosition();
                 orientation = viewHolder.itemView.getResources().getConfiguration().orientation;
                 if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    Log.e("switch", "success");
                     createDefinitionDetailFragment(itemPosition);
                 } else {
                     Intent intent = new Intent(context, DefinitionDetailActivity.class);

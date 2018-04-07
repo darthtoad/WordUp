@@ -1,12 +1,15 @@
 package com.example.samuelgespass.wordup.ui;
 
 
+import android.content.Context;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,6 +18,7 @@ import com.example.samuelgespass.wordup.R;
 import com.example.samuelgespass.wordup.adapters.FirebaseDefinitionListAdapter;
 import com.example.samuelgespass.wordup.adapters.FirebaseWordViewHolder;
 import com.example.samuelgespass.wordup.models.Definition;
+import com.example.samuelgespass.wordup.util.OnDefintionSelectedListener;
 import com.example.samuelgespass.wordup.util.OnStartDragListener;
 import com.example.samuelgespass.wordup.util.SimpleItemTouchHelperCallback;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,9 +38,16 @@ public class SavedDefinitionFragment extends Fragment implements OnStartDragList
 
     private FirebaseDefinitionListAdapter firebaseDefinitionListAdapter;
     private ItemTouchHelper helper;
+    private OnDefintionSelectedListener onDefintionSelectedListener;
 
     public SavedDefinitionFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
 
@@ -49,6 +60,22 @@ public class SavedDefinitionFragment extends Fragment implements OnStartDragList
         setUpFirebaseAdapter();
         return view;
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            onDefintionSelectedListener = (OnDefintionSelectedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + e.getMessage());
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private void setUpFirebaseAdapter() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
