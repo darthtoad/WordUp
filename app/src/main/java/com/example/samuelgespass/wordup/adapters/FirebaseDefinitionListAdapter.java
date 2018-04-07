@@ -78,7 +78,7 @@ public class FirebaseDefinitionListAdapter extends FirebaseRecyclerAdapter<Defin
 
     @Override
     protected void populateViewHolder(final FirebaseWordViewHolder viewHolder, Definition model, int position) {
-        viewHolder.bindWord(model);
+        viewHolder.bindDefinition(model);
         viewHolder.image.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {

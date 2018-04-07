@@ -69,7 +69,7 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
 //        }
     }
 
-    public void bindWord(Definition definition) {
+    public void bindDefinition(Definition definition) {
         clickText = (Button) view.findViewById(R.id.clickText);
         wordTextView = (TextView) view.findViewById(R.id.wordTextView);
         image = (ImageView) view.findViewById(R.id.image);
@@ -86,8 +86,6 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
     public void onClick(View view) {
         if (view == clickText) {
             Intent intent = new Intent(context, DefinitionActivity.class);
-            intent.putExtra("word", word);
-            intent.putExtra("dictionary", "wiktionary");
             context.startActivity(intent);
         }
     }
