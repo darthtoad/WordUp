@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity"></activity>
+        <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.DefinitionActivity" />
         <activity android:name=".ui.EtymologyActivity" />
         <activity
@@ -26,7 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.SavedDefinitionListActivity"></activity>
+        <activity android:name=".ui.SavedDefinitionListActivity" />
+        <activity android:name=".ui.DefinitionDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (v == favoritesButton) {
             Intent intent = new Intent(MainActivity.this, SavedDefinitionListActivity.class);
+            intent.putExtra("favorites",true);
             startActivity(intent);
         }
     }

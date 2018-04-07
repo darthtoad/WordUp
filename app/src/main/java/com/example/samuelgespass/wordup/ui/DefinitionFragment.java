@@ -69,7 +69,7 @@ public class DefinitionFragment extends Fragment implements View.OnClickListener
     @BindView(R.id.image)
     ImageView imageView;
 
-    ArrayList<Definition> definitions = new ArrayList<>();
+    ArrayList<Definition> definitions;
 
     String imageUrl = "";
 
@@ -86,27 +86,16 @@ public class DefinitionFragment extends Fragment implements View.OnClickListener
     private SharedPreferences.Editor editor;
 
     private Set<String> definitionSet;
-
     private int position;
 
     public DefinitionFragment() {
         // Required empty public constructor
     }
 
-    public static DefinitionFragment newInstance(ArrayList<Definition> definitions, Integer position) {
-        DefinitionFragment definitionFragment = new DefinitionFragment();
-        Bundle args = new Bundle();
-        args.putParcelable(Constants.EXTRA_KEY_DEFINITIONS, Parcels.wrap(definitions));
-        args.putInt(Constants.EXTRA_KEY_POSITION, position);
-        definitionFragment.setArguments(args);
-        return definitionFragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        definitions = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_KEY_DEFINITIONS));
-        position = getArguments().getInt(Constants.EXTRA_KEY_POSITION);
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         editor = sharedPreferences.edit();
         setHasOptionsMenu(true);

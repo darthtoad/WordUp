@@ -3,14 +3,19 @@ package com.example.samuelgespass.wordup.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MotionEventCompat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.samuelgespass.wordup.Constants;
+import com.example.samuelgespass.wordup.R;
 import com.example.samuelgespass.wordup.models.Definition;
 import com.example.samuelgespass.wordup.ui.DefinitionActivity;
+import com.example.samuelgespass.wordup.ui.DefinitionDetailFragment;
+import com.example.samuelgespass.wordup.ui.DefinitionFragment;
 import com.example.samuelgespass.wordup.util.ItemTouchHelperAdapter;
 import com.example.samuelgespass.wordup.util.OnStartDragListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -71,10 +76,6 @@ public class FirebaseDefinitionListAdapter extends FirebaseRecyclerAdapter<Defin
     @Override
     protected void populateViewHolder(final FirebaseWordViewHolder viewHolder, Definition model, int position) {
         viewHolder.bindWord(model);
-        orientation = viewHolder.itemView.getResources().getConfiguration().orientation;
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            viewHolder.createDefinitionFragment(0);
-        }
         viewHolder.image.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
@@ -84,6 +85,26 @@ public class FirebaseDefinitionListAdapter extends FirebaseRecyclerAdapter<Defin
                 return false;
             }
         });
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int itemPosition = viewHolder.getAdapterPosition();
+                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    createDefinitionDetailFragment(itemPosition);
+                }
+            }
+        });
+    }
+
+    private void createDefinitionDetailFragment(int position) {
+        DefinitionDetailFragment definitionDetailFragment = DefinitionDetailFragment.newInstance(definitions, position);
+
+        FragmentTransaction fragmentTransaction = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
+
+        fragmentTransaction.replace(R.id.definitionContainer, definitionDetailFragment);
+
+        fragmentTransaction.commit();
     }
 
     @Override
