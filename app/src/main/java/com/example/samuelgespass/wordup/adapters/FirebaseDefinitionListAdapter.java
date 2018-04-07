@@ -14,6 +14,7 @@ import com.example.samuelgespass.wordup.Constants;
 import com.example.samuelgespass.wordup.R;
 import com.example.samuelgespass.wordup.models.Definition;
 import com.example.samuelgespass.wordup.ui.DefinitionActivity;
+import com.example.samuelgespass.wordup.ui.DefinitionDetailActivity;
 import com.example.samuelgespass.wordup.ui.DefinitionDetailFragment;
 import com.example.samuelgespass.wordup.ui.DefinitionFragment;
 import com.example.samuelgespass.wordup.util.ItemTouchHelperAdapter;
@@ -28,6 +29,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -90,8 +93,14 @@ public class FirebaseDefinitionListAdapter extends FirebaseRecyclerAdapter<Defin
             @Override
             public void onClick(View v) {
                 int itemPosition = viewHolder.getAdapterPosition();
+                orientation = viewHolder.itemView.getResources().getConfiguration().orientation;
                 if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
                     createDefinitionDetailFragment(itemPosition);
+                } else {
+                    Intent intent = new Intent(context, DefinitionDetailActivity.class);
+                    intent.putExtra(Constants.EXTRA_KEY_POSITION, itemPosition);
+                    intent.putExtra(Constants.EXTRA_KEY_DEFINITIONS, Parcels.wrap(definitions));
+                    context.startActivity(intent);
                 }
             }
         });

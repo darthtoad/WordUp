@@ -60,13 +60,13 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
     public FirebaseWordViewHolder(View itemView) {
         super(itemView);
         view = itemView;
-        orientation = itemView.getResources().getConfiguration().orientation;
+//        orientation = itemView.getResources().getConfiguration().orientation;
         context = itemView.getContext();
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        editor = sharedPreferences.edit();
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            createDefinitionFragment(0);
-        }
+//        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+//        editor = sharedPreferences.edit();
+//        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            createDefinitionFragment(0);
+//        }
     }
 
     public void bindWord(Definition definition) {
@@ -86,18 +86,13 @@ public class FirebaseWordViewHolder extends RecyclerView.ViewHolder implements V
     public void onClick(View view) {
         if (view == clickText) {
             Intent intent = new Intent(context, DefinitionActivity.class);
-            definitionSet.add(word);
-            definitionSet.add("wiktionary");
-            addToSharedPreferences(definitionSet);
+            intent.putExtra("word", word);
+            intent.putExtra("dictionary", "wiktionary");
             context.startActivity(intent);
         }
     }
-
-    private void createDefinitionFragment(int position) {
-        DefinitionDetailFragment definitionDetailFragment = DefinitionDetailFragment.newInstance(definitions, position);
-    }
-
-    private void addToSharedPreferences(Set<String> definitionSet) {
-        editor.putStringSet(Constants.PREFERENCES_DEFINITION_KEY, definitionSet).apply();
-    }
+//
+//    private void addToSharedPreferences(Set<String> definitionSet) {
+//        editor.putStringSet(Constants.PREFERENCES_DEFINITION_KEY, definitionSet).apply();
+//    }
 }
